@@ -1,57 +1,51 @@
 import * as actionTypes from '../actionTypes';
 
 const initialState = {
-  items: [
-    {
-      id: 0,
-      title: 'sampleTitle0',
-      value: 3.0,
-      description: 'sampleDescription0',
-      quantity: 0,
-    },
-    {
-      id: 1,
-      title: 'sampleTitle1',
-      value: 5.0,
-      description: 'sampleDescription1',
-      quantity: 0,
-    },
-  ],
+  quantity: [],
   total: 0,
 };
 
 export default function cartReducer(state = initialState, action) {
-  var cpItems = state.items;
+  var cpQuantity = state.quantity;
   var cpTotal = state.total;
 
   switch (action.type) {
+    case actionTypes.INIT_CART: {
+      console.log('---INIT_CART---');
+      const newArray = new Array(action.payload).fill(0);
+      cpQuantity = newArray;
+
+      return {
+        ...state,
+        quantity: cpQuantity,
+      };
+    }
     case actionTypes.ADD_ITEM: {
+      console.log('---ADD_ITEM---');
       const id = action.payload;
-      cpItems[id].quantity++;
+      cpQuantity[id]++;
       cpTotal++;
 
       return {
         ...state,
-        items: cpItems,
+        quantity: cpQuantity,
         total: cpTotal,
       };
     }
     case actionTypes.REMOVE_ITEM: {
+      console.log('---REMOVE_ITEM---');
       const id = action.payload;
 
-      if (cpItems[id].quantity !== 0) {
-        cpItems[id].quantity--;
+      if (cpQuantity[id] !== 0) {
+        cpQuantity[id]--;
         cpTotal--;
       }
 
       return {
         ...state,
-        items: cpItems,
+        quantity: cpQuantity,
         total: cpTotal,
       };
-    }
-    case actionTypes.FETCH_ITEM_SUCCESS: {
-      console.log('---FETCH_ITEM_SUCCESS---');
     }
     default:
       return state;

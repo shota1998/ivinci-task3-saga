@@ -1,4 +1,4 @@
-import { all, call, put } from 'redux-saga/effects';
+import { call, put } from 'redux-saga/effects';
 
 import * as actions from '../actions';
 import { getItems } from '../api/items';
@@ -11,6 +11,7 @@ export default function* fetchProducts() {
     } else {
       console.log(data);
       yield put(actions.fetchItemSuccess(data));
+      yield put(actions.initCart(data.length));
     }
   } catch (e) {
     console.error(e);

@@ -1,10 +1,10 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
-import { addItem } from "../redux/actions";
+import { addItem } from '../redux/actions';
 
-import classes from "./Item.module.css";
-import AddCartButton from "./UI/AddCartButton";
+import classes from './Item.module.css';
+import AddCartButton from './UI/AddCartButton';
 
 const Item = ({ item, addItem }) => (
   <li className={classes.item}>

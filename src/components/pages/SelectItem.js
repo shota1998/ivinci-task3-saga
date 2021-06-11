@@ -1,10 +1,10 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
-import { getItemList } from "../../redux/selectors";
+import { getItemList } from '../../redux/selectors';
 
-import classes from "./SelectItem.module.css";
-import Item from "../Item";
+import classes from './SelectItem.module.css';
+import Item from '../Item';
 
 const SelectItem = ({ items }) => (
   <section className={classes.products}>

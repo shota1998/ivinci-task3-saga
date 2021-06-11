@@ -1,25 +1,25 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
-import { getTotalPurchace } from "../redux/selectors";
-import { addItem, removeItem } from "../redux/actions";
+import * as selector from '../redux/selectors';
+import { addItem, removeItem } from '../redux/actions';
 
-import classes from "./CartItem.module.css";
-import ChangeQuantityButton from "./UI/ChangeQuantityButton ";
+import classes from './CartItem.module.css';
+import ChangeQuantityButton from './UI/ChangeQuantityButton ';
 
-const CartItem = ({ item, addItem, removeItem }) => (
+const CartItem = ({ item, quantity, addItem, removeItem }) => (
   <li className={classes.item}>
     <header>
       <h3>{item.title}</h3>
       <div className={classes.price}>
-        ${item.value * item.quantity}
+        ${item.value * quantity[item.id]}
         <span className={classes.itemprice}>(${item.value}/item)</span>
       </div>
     </header>
 
     <div className={classes.details}>
       <div className={classes.quantity}>
-        x <span>{item.quantity}</span>
+        x <span>{quantity[item.id]}</span>
       </div>
       <div className={classes.actions}>
         <ChangeQuantityButton onClick={() => addItem(item.id)}>
@@ -35,7 +35,8 @@ const CartItem = ({ item, addItem, removeItem }) => (
 
 export default connect(
   (state) => ({
-    total: getTotalPurchace(state),
+    total: selector.getTotalhQuantity(state),
+    quantity: selector.getCartState(state).quantity,
   }),
   { addItem, removeItem }
 )(CartItem);

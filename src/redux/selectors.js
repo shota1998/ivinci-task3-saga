@@ -1,10 +1,16 @@
-export const getCartState = (store) => store.cart;
+export const getItemState = (store) => store.item;
 
 export const getItemList = (store) =>
-  getCartState(store) ? getCartState(store).items : [];
+  getItemState(store) ? getItemState(store).items : [];
 
-export const getTotalPurchace = (store) =>
+export const getCartState = (store) => store.cart;
+
+export const getOneQuantity = (store, id) => {
+  console.log(id);
+  return getCartState(store).quantity[id]
+    ? getCartState(store).quantity[id]
+    : [];
+};
+
+export const getTotalhQuantity = (store) =>
   getCartState(store) ? getCartState(store).total : [];
-
-export const getItemQuantity = (store, id) =>
-  getCartState(store)[id] ? getCartState(store)[id].quantity : [];
