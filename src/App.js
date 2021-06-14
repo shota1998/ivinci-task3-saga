@@ -6,13 +6,20 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import classes from './App.module.css';
+import { connect } from 'react-redux';
 
+import * as actions from './redux/actions';
+import classes from './App.module.css';
 import Header from './components/Header';
 import SelectItem from './components/pages/SelectItem';
 import Cart from './components/pages/Cart';
 
-export default class App extends React.Component {
+class App extends React.Component {
+  componentDidMount() {
+    console.log('--- App.componentDidMount()');
+    this.props.fetchItem();
+  }
+
   render() {
     return (
       <div>
@@ -26,3 +33,7 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default connect(null, {
+  fetchItem: () => actions.fetchItemRequest(),
+})(App);

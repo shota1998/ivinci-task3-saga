@@ -5,6 +5,10 @@ export const getItemList = (store) =>
 
 export const getCartState = (store) => store.cart;
 
+export const getCartItems = (store) => {
+  return getCartState(store).items;
+};
+
 export const getOneQuantity = (store, id) => {
   console.log(id);
   return getCartState(store).quantity[id]
