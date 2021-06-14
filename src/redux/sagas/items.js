@@ -1,9 +1,11 @@
-import { call, put } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
 
 import * as actions from '../actions';
+import * as actionTypes from '../actionTypes';
 import { getItems } from '../api/items';
 
-export default function* fetchProducts() {
+export function* fetchProducts() {
+  console.log('--- fetchProducts()');
   try {
     const { data, error } = yield call(getItems);
     if (error) {
@@ -11,13 +13,16 @@ export default function* fetchProducts() {
     } else {
       console.log(data);
       yield put(actions.fetchItemSuccess(data));
-      yield put(actions.initCart(data.length));
     }
   } catch (e) {
     console.error(e);
   }
 }
 
-// const itemSagas = [all(fetchProducts())];
+export function* watchFetchProducts() {
+  console.log('--- watchFetchProducts()');
+  yield takeEvery(actionTypes.FETCH_ITEM_REQUEST, fetchProducts);
+}
 
-// export default itemSagas;
+const itemSagas = [call(watchFetchProducts)];
+export default itemSagas;

@@ -1,49 +1,58 @@
 import * as actionTypes from '../actionTypes';
 
 const initialState = {
-  quantity: [],
+  items: [],
   total: 0,
 };
 
 export default function cartReducer(state = initialState, action) {
-  var cpQuantity = state.quantity;
+  var cpItems = state.items;
   var cpTotal = state.total;
 
   switch (action.type) {
-    case actionTypes.INIT_CART: {
-      console.log('---INIT_CART---');
-      const newArray = new Array(action.payload).fill(0);
-      cpQuantity = newArray;
-
-      return {
-        ...state,
-        quantity: cpQuantity,
-      };
-    }
     case actionTypes.ADD_ITEM: {
       console.log('---ADD_ITEM---');
-      const id = action.payload;
-      cpQuantity[id]++;
+      const addedItem = JSON.parse(JSON.stringify(action.payload.item));
+      var isNew = true;
+
+      for (var cpItem of cpItems) {
+        if (cpItem.id === addedItem.id) {
+          cpItem.quantity++;
+          isNew = false;
+          break;
+        }
+      }
+
+      if (isNew) {
+        addedItem.quantity++;
+        cpItems.push(addedItem);
+      }
       cpTotal++;
 
       return {
         ...state,
-        quantity: cpQuantity,
+        items: cpItems,
         total: cpTotal,
       };
     }
     case actionTypes.REMOVE_ITEM: {
       console.log('---REMOVE_ITEM---');
-      const id = action.payload;
+      const id = action.payload.id;
 
-      if (cpQuantity[id] !== 0) {
-        cpQuantity[id]--;
-        cpTotal--;
-      }
+      cpItems.forEach((cpItem, index) => {
+        if (cpItem.id === id) {
+          cpItem.quantity--;
+          cpTotal--;
+
+          if (cpItem.quantity === 0) {
+            cpItems.splice(index, 1);
+          }
+        }
+      });
 
       return {
         ...state,
-        quantity: cpQuantity,
+        items: cpItems,
         total: cpTotal,
       };
     }

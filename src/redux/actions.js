@@ -1,18 +1,13 @@
 import * as actionType from './actionTypes';
 
-export const initCart = (ids) => ({
-  type: actionType.INIT_CART,
-  payload: ids,
-});
-
-export const addItem = (id) => ({
+export const addItem = (item) => ({
   type: actionType.ADD_ITEM,
-  payload: id,
+  payload: { item },
 });
 
 export const removeItem = (id) => ({
   type: actionType.REMOVE_ITEM,
-  payload: id,
+  payload: { id },
 });
 
 export const fetchItemRequest = () => ({

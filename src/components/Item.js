@@ -14,9 +14,7 @@ const Item = ({ item, addItem }) => (
         <div className={classes.price}>${item.value}</div>
       </header>
       <p>{item.description}</p>
-      <AddCartButton onClick={() => addItem(item.id)}>
-        Add to Cart
-      </AddCartButton>
+      <AddCartButton onClick={() => addItem(item)}>Add to Cart</AddCartButton>
     </section>
   </li>
 );
