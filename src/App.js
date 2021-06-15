@@ -18,6 +18,7 @@ class App extends React.Component {
   componentDidMount() {
     console.log('--- App.componentDidMount()');
     this.props.fetchItem();
+    this.props.fetchCartItem();
   }
 
   render() {
@@ -36,4 +37,5 @@ class App extends React.Component {
 
 export default connect(null, {
   fetchItem: () => actions.fetchItemRequest(),
+  fetchCartItem: () => actions.fetchCartItemRequest(),
 })(App);

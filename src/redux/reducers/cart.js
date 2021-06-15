@@ -10,6 +10,19 @@ export default function cartReducer(state = initialState, action) {
   var cpTotal = state.total;
 
   switch (action.type) {
+    case actionTypes.FETCH_CART_ITEM_SUCCESS: {
+      console.log('---FETCH_CART_ITEM_SUCCESS---');
+      cpItems = action.payload.items;
+      for (const cpItem of cpItems) {
+        cpTotal += parseInt(cpItem.quantity);
+      }
+
+      return {
+        ...state,
+        items: cpItems,
+        total: cpTotal,
+      };
+    }
     case actionTypes.ADD_ITEM: {
       console.log('---ADD_ITEM---');
       const addedItem = JSON.parse(JSON.stringify(action.payload.item));

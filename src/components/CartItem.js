@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import * as selector from '../redux/selectors';
-import { addItem, removeItem } from '../redux/actions';
+import { addItem, removeItem, fetchCartItemRequest } from '../redux/actions';
 
 import classes from './CartItem.module.css';
 import ChangeQuantityButton from './UI/ChangeQuantityButton ';
 
 const CartItem = ({ item, addItem, removeItem }) => (
   <li className={classes.item}>
+    {console.log('--- Cart rendered.')}
     <header>
       <h3>{item.title}</h3>
       <div className={classes.price}>
@@ -34,8 +35,8 @@ const CartItem = ({ item, addItem, removeItem }) => (
 );
 
 export default connect(
-  (state) => ({
-    total: selector.getTotalhQuantity(state),
+  (state, ownProps) => ({
+    quantity: selector.getOneQuantity(state, ownProps.item.id),
   }),
-  { addItem, removeItem }
+  { addItem, removeItem, fetchCartItemRequest }
 )(CartItem);
