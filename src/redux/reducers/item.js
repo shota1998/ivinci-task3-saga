@@ -10,7 +10,7 @@ export default function itemReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.FETCH_ITEM_SUCCESS: {
       console.log('---FETCH_ITEM_SUCCESS---');
-      cpItems = action.payload;
+      cpItems = action.payload.items;
       return {
         ...state,
         items: cpItems,

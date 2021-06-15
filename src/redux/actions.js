@@ -16,5 +16,14 @@ export const fetchItemRequest = () => ({
 
 export const fetchItemSuccess = (items) => ({
   type: actionType.FETCH_ITEM_SUCCESS,
-  payload: items,
+  payload: { items },
+});
+
+export const fetchCartItemRequest = () => ({
+  type: actionType.FETCH_CART_ITEM_REQUEST,
+});
+
+export const fetchCartItemSuccess = (items) => ({
+  type: actionType.FETCH_CART_ITEM_SUCCESS,
+  payload: { items },
 });

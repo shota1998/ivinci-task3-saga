@@ -1,3 +1,5 @@
+import itemSagas from './sagas/items';
+
 export const getItemState = (store) => store.item;
 
 export const getItemList = (store) =>
@@ -10,10 +12,13 @@ export const getCartItems = (store) => {
 };
 
 export const getOneQuantity = (store, id) => {
-  console.log(id);
-  return getCartState(store).quantity[id]
-    ? getCartState(store).quantity[id]
-    : [];
+  const items = getCartState(store).items;
+  for (const item of items) {
+    if (item.id === id) {
+      return item.quantity;
+    }
+  }
+  return 0;
 };
 
 export const getTotalhQuantity = (store) =>

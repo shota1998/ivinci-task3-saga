@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const getItems = () =>
+export const getCartItems = () =>
   axios
-    .get('http://localhost:8080/items/list')
+    .get('http://localhost:8080/cart/list')
     .then((res) => {
       const data = res.data;
       return { data };
