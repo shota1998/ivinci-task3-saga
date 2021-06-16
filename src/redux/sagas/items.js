@@ -19,10 +19,5 @@ export function* fetchProducts() {
   }
 }
 
-export function* watchFetchProducts() {
-  console.log('--- watchFetchProducts()');
-  yield takeEvery(actionTypes.FETCH_ITEM_REQUEST, fetchProducts);
-}
-
-const itemSagas = [call(watchFetchProducts)];
+const itemSagas = [takeEvery(actionTypes.FETCH_ITEM_REQUEST, fetchProducts)];
 export default itemSagas;

@@ -3,11 +3,13 @@ import * as actionTypes from '../actionTypes';
 const initialState = {
   items: [],
   total: 0,
+  changedItem: {},
 };
 
 export default function cartReducer(state = initialState, action) {
   var cpItems = state.items;
   var cpTotal = state.total;
+  var changedItem = {};
 
   switch (action.type) {
     case actionTypes.FETCH_CART_ITEM_SUCCESS: {
@@ -31,6 +33,7 @@ export default function cartReducer(state = initialState, action) {
       for (var cpItem of cpItems) {
         if (cpItem.id === addedItem.id) {
           cpItem.quantity++;
+          changedItem = cpItem;
           isNew = false;
           break;
         }
@@ -38,6 +41,7 @@ export default function cartReducer(state = initialState, action) {
 
       if (isNew) {
         addedItem.quantity++;
+        changedItem = addedItem;
         cpItems.push(addedItem);
       }
       cpTotal++;
@@ -46,6 +50,7 @@ export default function cartReducer(state = initialState, action) {
         ...state,
         items: cpItems,
         total: cpTotal,
+        changedItem: changedItem,
       };
     }
     case actionTypes.REMOVE_ITEM: {
@@ -56,7 +61,7 @@ export default function cartReducer(state = initialState, action) {
         if (cpItem.id === id) {
           cpItem.quantity--;
           cpTotal--;
-
+          changedItem = cpItem;
           if (cpItem.quantity === 0) {
             cpItems.splice(index, 1);
           }
@@ -67,6 +72,7 @@ export default function cartReducer(state = initialState, action) {
         ...state,
         items: cpItems,
         total: cpTotal,
+        changedItem: changedItem,
       };
     }
     default:

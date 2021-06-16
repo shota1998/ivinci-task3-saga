@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
@@ -16,8 +11,6 @@ import Cart from './components/pages/Cart';
 
 class App extends React.Component {
   componentDidMount() {
-    console.log('--- App.componentDidMount()');
-    this.props.fetchItem();
     this.props.fetchCartItem();
   }
 
@@ -36,6 +29,5 @@ class App extends React.Component {
 }
 
 export default connect(null, {
-  fetchItem: () => actions.fetchItemRequest(),
   fetchCartItem: () => actions.fetchCartItemRequest(),
 })(App);

@@ -5,6 +5,11 @@ export const addItem = (item) => ({
   payload: { item },
 });
 
+export const addToCart = (item) => ({
+  type: actionType.ADD_TO_CART,
+  payload: { item },
+});
+
 export const removeItem = (id) => ({
   type: actionType.REMOVE_ITEM,
   payload: { id },

@@ -1,8 +1,12 @@
 import axios from 'axios';
 
+const myAxios = axios.create({
+  baseURL: 'http://localhost:8080/items',
+});
+
 export const getItems = () =>
-  axios
-    .get('http://localhost:8080/items/list')
+  myAxios
+    .get('/list')
     .then((res) => {
       const data = res.data;
       return { data };

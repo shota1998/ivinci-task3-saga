@@ -9,7 +9,6 @@ import ChangeQuantityButton from './UI/ChangeQuantityButton ';
 
 const CartItem = ({ item, addItem, removeItem }) => (
   <li className={classes.item}>
-    {console.log('--- Cart rendered.')}
     <header>
       <h3>{item.title}</h3>
       <div className={classes.price}>

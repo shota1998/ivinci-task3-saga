@@ -1,5 +1,3 @@
-import itemSagas from './sagas/items';
-
 export const getItemState = (store) => store.item;
 
 export const getItemList = (store) =>
@@ -7,8 +5,11 @@ export const getItemList = (store) =>
 
 export const getCartState = (store) => store.cart;
 
-export const getCartItems = (store) => {
-  return getCartState(store).items;
+export const getCartItems = (store) => getCartState(store).items;
+
+export const getChangedCartItem = (store) => {
+  const changedItem = getCartState(store).changedItem;
+  return changedItem;
 };
 
 export const getOneQuantity = (store, id) => {
@@ -21,5 +22,5 @@ export const getOneQuantity = (store, id) => {
   return 0;
 };
 
-export const getTotalhQuantity = (store) =>
+export const getTotalQuantity = (store) =>
   getCartState(store) ? getCartState(store).total : [];

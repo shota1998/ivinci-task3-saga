@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getCartItems, getTotalhQuantity } from '../../redux/selectors';
+import { getCartItems, getCartState } from '../../redux/selectors';
 
 import classes from './Cart.module.css';
 import CartItem from '../CartItem';
@@ -19,5 +19,5 @@ const Cart = ({ items }) => (
 
 export default connect((state) => ({
   items: getCartItems(state),
-  total: getTotalhQuantity(state),
+  total: getCartState(state).total
 }))(Cart);
