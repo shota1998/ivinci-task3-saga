@@ -14,14 +14,7 @@ export function* fetchCartItems() {
       console.log(error);
     } else {
       console.log(data);
-      var total = 0;
-
-      for (const item of data) {
-        total += parseInt(item.quantity);
-      }
-
-      const newCart = { items: data, total: total };
-      yield put(actions.updateCartReducer(newCart));
+      yield put(actions.updateCartReducer(data));
     }
   } catch (e) {
     console.error(e);
@@ -31,7 +24,6 @@ export function* fetchCartItems() {
 export function* addItem(action) {
   console.log('--- addItem(action)');
   var cartItems = yield select(selector.getCartItems);
-  var total = yield select(selector.getCartTotal);
   var addedItem = JSON.parse(JSON.stringify(action.payload.item));
   var isNew = true;
 
@@ -48,14 +40,8 @@ export function* addItem(action) {
     addedItem.quantity++;
     cartItems.push(addedItem);
   }
-  total++;
 
-  const newCart = {
-    items: cartItems,
-    total: total,
-  };
-
-  yield put(actions.updateCartReducer(newCart));
+  yield put(actions.updateCartReducer(cartItems));
 
   try {
     yield call(api.updateCart, addedItem);
@@ -67,7 +53,6 @@ export function* addItem(action) {
 export function* removeItem(action) {
   console.log('--- removeItem(action)');
   var cartItems = yield select(selector.getCartItems);
-  var total = yield select(selector.getCartTotal);
   var removedItem = JSON.parse(JSON.stringify(action.payload.item));
   var isZero = false;
 
@@ -81,14 +66,8 @@ export function* removeItem(action) {
       }
     }
   });
-  total--;
 
-  const newCart = {
-    items: cartItems,
-    total: total,
-  };
-
-  yield put(actions.updateCartReducer(newCart));
+  yield put(actions.updateCartReducer(cartItems));
 
   try {
     if (isZero) {

@@ -9,11 +9,16 @@ export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case actionTypes.UPDATE_CART_REDUCER: {
       console.log('---UPDATE_CART_REDUCER---');
+      const items = action.payload.items;
+      var total = 0;
+      for (const item of items) {
+        total += item.quantity;
+      }
 
       return {
         ...state,
-        items: action.payload.cart.items,
-        total: action.payload.cart.total,
+        items: items,
+        total: total,
       };
     }
 

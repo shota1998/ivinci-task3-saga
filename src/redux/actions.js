@@ -4,9 +4,9 @@ export const fetchCartItemRequest = () => ({
   type: actionType.FETCH_CART_ITEM_REQUEST,
 });
 
-export const updateCartReducer = (cart) => ({
+export const updateCartReducer = (items) => ({
   type: actionType.UPDATE_CART_REDUCER,
-  payload: { cart },
+  payload: { items },
 });
 
 export const addItem = (item) => ({
