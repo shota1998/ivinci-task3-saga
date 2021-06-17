@@ -30,21 +30,19 @@ export function* addItem(action) {
   for (var item of cartItems) {
     if (item.id === addedItem.id) {
       item.quantity++;
-      addedItem = item;
       isNew = false;
       break;
     }
   }
 
   if (isNew) {
-    addedItem.quantity++;
     cartItems.push(addedItem);
   }
 
   yield put(actions.updateCartReducer(cartItems));
 
   try {
-    yield call(api.updateCart, addedItem);
+    yield call(api.updateCart, cartItems);
   } catch (e) {
     console.error(e);
   }
@@ -59,7 +57,6 @@ export function* removeItem(action) {
   cartItems.forEach((item, index) => {
     if (item.id === removedItem.id) {
       item.quantity--;
-      removedItem.quantity--;
       if (item.quantity === 0) {
         cartItems.splice(index, 1);
         isZero = true;
@@ -73,7 +70,7 @@ export function* removeItem(action) {
     if (isZero) {
       yield call(api.deleteCartItem, removedItem);
     } else {
-      yield call(api.updateCart, removedItem);
+      yield call(api.updateCart, cartItems);
     }
   } catch (e) {
     console.error(e);

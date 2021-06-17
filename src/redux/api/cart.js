@@ -15,9 +15,9 @@ export const getCartItems = () =>
       return { error };
     });
 
-export const updateCart = (item) =>
+export const updateCart = (items) =>
   myAxios
-    .post('/', item)
+    .post('/', items)
     .then((res) => {
       console.log(res);
     })
