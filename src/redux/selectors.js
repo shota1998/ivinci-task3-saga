@@ -1,11 +1,15 @@
+//-----Item Selector
 export const getItemState = (store) => store.item;
 
 export const getItemList = (store) =>
   getItemState(store) ? getItemState(store).items : [];
 
+//-----Cart Selector
 export const getCartState = (store) => store.cart;
 
 export const getCartItems = (store) => getCartState(store).items;
+
+export const getCartTotal = (store) => getCartState(store).total;
 
 export const getChangedCartItem = (store) => {
   const changedItem = getCartState(store).changedItem;

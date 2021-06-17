@@ -25,7 +25,7 @@ const CartItem = ({ item, addItem, removeItem }) => (
         <ChangeQuantityButton onClick={() => addItem(item)}>
           +
         </ChangeQuantityButton>
-        <ChangeQuantityButton onClick={() => removeItem(item.id)}>
+        <ChangeQuantityButton onClick={() => removeItem(item)}>
           -
         </ChangeQuantityButton>
       </div>
